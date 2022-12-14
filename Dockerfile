@@ -1,4 +1,4 @@
-FROM node:16-alpine AS builder
+FROM node:18-alpine AS builder
 
 WORKDIR /bot
 
@@ -8,6 +8,8 @@ COPY prisma ./prisma/
 
 COPY tsconfig.json ./
 
+RUN apk add --update --no-cache openssl1.1-compat
+
 RUN npm install
 
 RUN npx prisma generate --schema=/bot/prisma/schema.prisma
@@ -16,11 +18,13 @@ COPY . .
 
 RUN npm run docker:build
 
-FROM node:16-alpine AS production
+FROM node:18-alpine AS production
 
 WORKDIR /bot
 
 COPY . .
+
+RUN apk add --update --no-cache openssl1.1-compat
 
 RUN npm install
 
