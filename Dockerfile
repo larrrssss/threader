@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM node:16-alpine AS builder
 
 WORKDIR /bot
 
@@ -16,7 +16,7 @@ COPY . .
 
 RUN npm run docker:build
 
-FROM node:18-alpine AS production
+FROM node:16-alpine AS production
 
 WORKDIR /bot
 
