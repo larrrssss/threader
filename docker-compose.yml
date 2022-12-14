@@ -1,0 +1,9 @@
+version: '3'
+services:
+  threader-bot:
+    build: .
+    container_name: "threader-bot"
+    network_mode: "host"
+    restart: "on-failure"
+    env_file:
+      - .env
