@@ -7,11 +7,13 @@ export default async (interaction: Interaction) => {
 
   if (interaction.commandName === 'keep-open') {
     const channel = interaction.channel as TextBasedChannel;
-    if (![ChannelType.PublicThread, ChannelType.PrivateThread].includes(channel.type)) 
-      return interaction.reply({
+    if (![ChannelType.PublicThread, ChannelType.PrivateThread].includes(channel.type)) {
+      interaction.reply({
         ephemeral: true,
         content: '❌ You can use this command only in thread channels',
       });
+      return;
+    }
 
     const keepingOpen = await db.channel.findUnique({
       where: { channel_id: channel.id },
