@@ -1,3 +1,3 @@
 # Threader
 
-Discord bot to keep your threads open
+Discord bot to keep your threads open.
